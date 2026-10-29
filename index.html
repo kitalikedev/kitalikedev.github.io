@@ -1,49 +1,97 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>My Site</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <style>
-        body,
-        html {
-            height: 100%;
-            margin: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kita | Software Engineer Portfolio</title>
+  
+  <meta name="title" content="Kita | Software Engineer Portfolio">
+  <meta name="description" content="Portfolio of Kita - Software Engineer & Web Developer.">
+  <meta name="keywords" content="software engineer, web developer, portfolio, frontend">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Kita">
 
-        body,
-        h1 {
-            font-family: "Raleway", sans-serif;
-        }
-
-        .bgimg {
-            background-image: url('https://images.unsplash.com/photo-1515256722043-0f2b082ddadc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            min-height: 100%;
-            background-position: center;
-            background-size: cover;
-        }
-    </style>
+  <meta property="og:title" content="Kita | Software Engineer Portfolio">
+  <meta property="og:description" content="Welcome to my developer portfolio.">
+  <meta property="og:image" content="/banner.avif">
+  <meta property="og:url" content="/">
+  <meta name="twitter:card" content="summary_large_image">
 </head>
-.bgimg {
-background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80');
-min-height: 100%;
-background-position: center;
-background-size: cover;
-}
+<body class="bg-gray-50 text-gray-800 antialiased selection:bg-teal-400 selection:text-white">
 
-<body>
-    <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
-        <div class="w3-display-topleft w3-padding-large w3-xlarge">
-            Logo
-        </div>
-        <div class="w3-display-middle">
-            <h1 class="w3-jumbo w3-animate-top">COMING SOON</h1>
-            <p class="w3-large w3-center">10 days left</p>
-        </div>
+  <!-- Banner -->
+  <section class="min-h-screen w-full flex flex-col justify-center items-center bg-[url('/banner.avif')] bg-cover bg-center relative">
+    <div class="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
+    <div class="relative z-10 w-full lg:w-[80%] p-8 lg:p-12 text-white">
+      <h1 class="text-4xl md:text-6xl font-extrabold mb-8 grid grid-cols-1 gap-3">
+        <span class="banner-text">Hi, my name is <span class="text-teal-400">Kita</span></span>
+        <span class="banner-text text-gray-200">I'm a Software Engineer.</span>
+      </h1>
+      <a href="#about-me" class="banner-cta inline-block uppercase border-2 border-teal-400 px-8 py-3 hover:bg-teal-400 hover:text-white transition-all duration-300 font-medium">
+        Know more
+      </a>
     </div>
-</body>
+  </section>
 
+  <!-- About Me -->
+  <section id="about-me" class="bg-teal-500 min-h-screen w-full flex flex-col justify-center items-center p-6 lg:p-12 text-white">
+    <div class="w-full lg:w-[70%]">
+      <h2 class="section-title uppercase text-3xl lg:text-5xl text-center font-bold mb-12">About Me</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+        <div class="section-content flex justify-center col-span-1">
+          <div class="w-48 h-48 lg:w-56 lg:h-56 rounded-2xl bg-white/10 border-2 border-white/20 backdrop-blur flex items-center justify-center font-bold text-6xl shadow-xl">
+            👨‍💻
+          </div>
+        </div>
+        <div class="section-content col-span-1 lg:col-span-2 text-center lg:text-left">
+          <p class="text-lg lg:text-xl font-light mb-8 leading-relaxed">
+            I build modern, scalable web applications and explore software architecture. Obsessed with high performance, clean terminal-first workflows, and crafting sleek user experiences.
+          </p>
+          <a href="#contact" class="inline-block uppercase border-2 border-white px-8 py-3 text-white hover:bg-white hover:text-teal-600 transition-all duration-300 font-semibold shadow-md">
+            View My CV
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="bg-white min-h-[450px] w-full flex flex-col justify-center items-center p-8 lg:p-12 text-gray-800">
+    <div class="w-full lg:w-[60%] text-center mb-8">
+      <h2 class="section-title uppercase text-3xl lg:text-5xl font-bold mb-4">Contact</h2>
+      <p class="section-content text-xl text-teal-600 font-semibold mb-2">LOOKING FORWARD TO WORKING WITH YOU</p>
+      <p class="section-content text-gray-600">Have an interesting project or challenge? Let's connect.</p>
+    </div>
+    <a href="mailto:contact@kitalikedev.io" class="section-content inline-block border-2 border-teal-500 bg-teal-500 text-white px-10 py-3.5 uppercase font-medium hover:bg-transparent hover:text-teal-600 transition-all duration-300 shadow-md">
+      Send An Email Now
+    </a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-neutral-900 py-12 flex flex-col justify-center items-center text-white">
+    <div class="w-full max-w-md flex flex-col items-center">
+      <ul class="flex flex-row space-x-8">
+        <li class="transform hover:-translate-y-1 transition duration-200">
+          <a href="https://twitter.com" target="_blank" class="text-gray-400 hover:text-teal-400">
+            <img class="w-8 h-8 opacity-70 hover:opacity-100 transition" src="/imgs/twitter.svg" alt="Twitter" />
+          </a>
+        </li>
+        <li class="transform hover:-translate-y-1 transition duration-200">
+          <a href="https://linkedin.com" target="_blank" class="text-gray-400 hover:text-teal-400">
+            <img class="w-8 h-8 opacity-70 hover:opacity-100 transition" src="/imgs/linkedin.svg" alt="LinkedIn" />
+          </a>
+        </li>
+        <li class="transform hover:-translate-y-1 transition duration-200">
+          <a href="https://github.com/kitalikedev" target="_blank" class="text-gray-400 hover:text-teal-400">
+            <img class="w-8 h-8 opacity-70 hover:opacity-100 transition" src="/imgs/github.svg" alt="GitHub" />
+          </a>
+        </li>
+      </ul>
+      <div class="w-48 h-px bg-gray-700 my-6"></div>
+      <p class="text-sm text-gray-500">© 2026 Kita. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/scripts/application.js"></script>
+</body>
 </html>
