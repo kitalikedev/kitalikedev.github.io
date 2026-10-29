@@ -1,96 +1,572 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth bg-black text-[#f5f5f7]">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kita | Software Engineer Portfolio</title>
+  <title>Kita — Software Engineer & Builder</title>
   
-  <meta name="title" content="Kita | Software Engineer Portfolio">
-  <meta name="description" content="Portfolio of Kita - Software Engineer & Web Developer.">
-  <meta name="keywords" content="software engineer, web developer, portfolio, frontend">
+  <meta name="title" content="Kita — Software Engineer & Builder">
+  <meta name="description" content="Software Engineer specializing in distributed computing, systems architecture, and modern client interfaces.">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Kita">
 
-  <meta property="og:title" content="Kita | Software Engineer Portfolio">
-  <meta property="og:description" content="Welcome to my developer portfolio.">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kitalikedev.github.io/">
+  <meta property="og:title" content="Kita — Software Engineer & Builder">
+  <meta property="og:description" content="Architecting low-latency systems. Designing fluid software.">
   <meta property="og:image" content="/banner.avif">
-  <meta property="og:url" content="/">
-  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts: Inter fallback with SF Pro Display precedence -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;450;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased selection:bg-teal-400 selection:text-white">
+<body class="bg-black text-[#f5f5f7] antialiased selection:bg-white/20 selection:text-white relative overflow-x-hidden min-h-screen">
 
-  <!-- Banner -->
-  <section class="min-h-screen w-full flex flex-col justify-center items-center bg-[url('/banner.avif')] bg-cover bg-center relative">
-    <div class="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
-    <div class="relative z-10 w-full lg:w-[80%] p-8 lg:p-12 text-white">
-      <h1 class="text-4xl md:text-6xl font-extrabold mb-8 grid grid-cols-1 gap-3">
-        <span class="banner-text">Hi, my name is <span class="text-teal-400">Kita</span></span>
-        <span class="banner-text text-gray-200">I'm a Software Engineer.</span>
-      </h1>
-      <a href="#about-me" class="banner-cta inline-block uppercase border-2 border-teal-400 px-8 py-3 hover:bg-teal-400 hover:text-white transition-all duration-300 font-medium">
-        Know more
+  <!-- 1. Floating Navigation Dock (Pure Apple Glass) -->
+  <header class="fixed top-5 inset-x-0 z-50 flex justify-center px-4">
+    <nav class="apple-glass-dock rounded-full px-5 py-2.5 shadow-2xl flex items-center justify-between gap-6 max-w-xl w-full" aria-label="Primary Navigation">
+      <!-- Monogram Logo -->
+      <a href="#hero" class="flex items-center gap-2 group text-sm font-semibold tracking-tight text-[#f5f5f7]">
+        <span class="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center text-xs font-semibold text-white group-hover:bg-white/20 transition-colors">
+          K
+        </span>
+        <span class="text-xs font-medium tracking-tight text-[#86868b] group-hover:text-[#f5f5f7] transition-colors">kita.dev</span>
       </a>
-    </div>
-  </section>
 
-  <!-- About Me -->
-  <section id="about-me" class="bg-teal-500 min-h-screen w-full flex flex-col justify-center items-center p-6 lg:p-12 text-white">
-    <div class="w-full lg:w-[70%]">
-      <h2 class="section-title uppercase text-3xl lg:text-5xl text-center font-bold mb-12">About Me</h2>
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-        <div class="section-content flex justify-center col-span-1">
-          <div class="w-48 h-48 lg:w-56 lg:h-56 rounded-2xl bg-white/10 border-2 border-white/20 backdrop-blur flex items-center justify-center font-bold text-6xl shadow-xl">
-            👨‍💻
-          </div>
+      <!-- Desktop Links -->
+      <div class="hidden sm:flex items-center gap-5 text-xs font-normal text-[#86868b]">
+        <a href="#projects" class="dock-nav-link hover:text-[#f5f5f7] transition-colors">Projects</a>
+        <a href="#engineering" class="dock-nav-link hover:text-[#f5f5f7] transition-colors">Engineering</a>
+        <a href="#stack" class="dock-nav-link hover:text-[#f5f5f7] transition-colors">Stack</a>
+        <a href="#contact" class="dock-nav-link hover:text-[#f5f5f7] transition-colors">Contact</a>
+      </div>
+
+      <!-- Resume Button & Mobile Toggle -->
+      <div class="flex items-center gap-2">
+        <a href="#contact" class="text-xs font-medium px-3.5 py-1.5 rounded-full bg-[#1d1d1f] hover:bg-[#2c2c2e] text-[#f5f5f7] border border-white/10 transition-colors">
+          Resume
+        </a>
+        <button id="mobile-menu-toggle" type="button" class="sm:hidden w-7 h-7 rounded-full bg-white/5 flex items-center justify-center text-[#86868b] hover:text-white transition-colors" aria-label="Toggle navigation" aria-expanded="false">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Navigation Dropdown -->
+    <div id="mobile-menu" class="hidden sm:hidden absolute top-14 inset-x-4 max-w-xs mx-auto apple-glass-dock rounded-2xl p-4 shadow-2xl flex flex-col gap-2.5 text-xs text-[#86868b] z-50">
+      <a href="#projects" class="mobile-nav-link hover:text-white transition-colors py-1">Projects</a>
+      <a href="#engineering" class="mobile-nav-link hover:text-white transition-colors py-1">Engineering</a>
+      <a href="#stack" class="mobile-nav-link hover:text-white transition-colors py-1">Stack</a>
+      <a href="#contact" class="mobile-nav-link hover:text-white transition-colors py-1">Contact</a>
+    </div>
+  </header>
+
+  <main class="relative z-10 flex flex-col items-center w-full">
+
+    <!-- 2. Hero Section (Apple Keynote Style) -->
+    <section id="hero" class="w-full max-w-5xl mx-auto px-6 pt-40 pb-28 md:pt-48 md:pb-36 flex flex-col items-center text-center">
+      
+      <!-- Monochromatic Status Badge -->
+      <div class="reveal-hero-badge inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-normal text-[#86868b] mb-8">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#f5f5f7]/60"></span>
+        <span>Software Engineer &amp; Builder</span>
+      </div>
+
+      <!-- Giant Typography Headline -->
+      <h1 class="reveal-hero-title text-4xl sm:text-6xl md:text-7xl lg:text-[76px] font-semibold tracking-[-0.035em] text-[#f5f5f7] leading-[1.06] max-w-4xl mx-auto mb-8">
+        Architecting low-latency systems.<br class="hidden sm:inline" />
+        <span class="text-[#86868b]">Designing fluid software.</span>
+      </h1>
+
+      <!-- Apple Neutral Subtitle -->
+      <p class="reveal-hero-desc text-base sm:text-lg md:text-xl text-[#86868b] font-normal leading-relaxed max-w-2xl mx-auto mb-10 tracking-tight">
+        Specializing in distributed computing, systems architecture, and modern client interfaces. Focused on mechanical sympathy, rigorous software design, and uncompromising user polish.
+      </p>
+
+      <!-- Sleek Pill Buttons -->
+      <div class="reveal-hero-cta flex flex-wrap items-center justify-center gap-3.5 w-full sm:w-auto">
+        <a href="#projects" class="apple-pill-primary px-7 py-3 text-sm inline-flex items-center justify-center gap-1.5 shadow-lg">
+          <span>View Work</span>
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </a>
+        <a href="#contact" class="apple-pill-secondary px-7 py-3 text-sm inline-flex items-center justify-center">
+          <span>Get in touch</span>
+        </a>
+      </div>
+
+      <!-- Quiet Hardware-Style Specs Strip -->
+      <div class="reveal-hero-cta mt-20 pt-10 border-t border-white/[0.08] w-full max-w-3xl grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+        <div>
+          <div class="text-xs uppercase tracking-wider text-[#86868b] font-medium mb-1">Architecture</div>
+          <div class="text-sm font-medium text-[#f5f5f7]">Distributed &amp; Event-Driven</div>
         </div>
-        <div class="section-content col-span-1 lg:col-span-2 text-center lg:text-left">
-          <p class="text-lg lg:text-xl font-light mb-8 leading-relaxed">
-            I build modern, scalable web applications and explore software architecture. Obsessed with high performance, clean terminal-first workflows, and crafting sleek user experiences.
-          </p>
-          <a href="#contact" class="inline-block uppercase border-2 border-white px-8 py-3 text-white hover:bg-white hover:text-teal-600 transition-all duration-300 font-semibold shadow-md">
-            View My CV
-          </a>
+        <div>
+          <div class="text-xs uppercase tracking-wider text-[#86868b] font-medium mb-1">Core Runtime</div>
+          <div class="text-sm font-medium text-[#f5f5f7]">C++20 · Go · TypeScript</div>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-wider text-[#86868b] font-medium mb-1">Methodology</div>
+          <div class="text-sm font-medium text-[#f5f5f7]">Profile-Guided Design</div>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-wider text-[#86868b] font-medium mb-1">Availability</div>
+          <div class="text-sm font-medium text-[#f5f5f7]">Q4 / Select Projects</div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Contact -->
-  <section id="contact" class="bg-white min-h-[450px] w-full flex flex-col justify-center items-center p-8 lg:p-12 text-gray-800">
-    <div class="w-full lg:w-[60%] text-center mb-8">
-      <h2 class="section-title uppercase text-3xl lg:text-5xl font-bold mb-4">Contact</h2>
-      <p class="section-content text-xl text-teal-600 font-semibold mb-2">LOOKING FORWARD TO WORKING WITH YOU</p>
-      <p class="section-content text-gray-600">Have an interesting project or challenge? Let's connect.</p>
-    </div>
-    <a href="mailto:contact@kitalikedev.io" class="section-content inline-block border-2 border-teal-500 bg-teal-500 text-white px-10 py-3.5 uppercase font-medium hover:bg-transparent hover:text-teal-600 transition-all duration-300 shadow-md">
-      Send An Email Now
-    </a>
-  </section>
+    </section>
 
-  <!-- Footer -->
-  <footer class="bg-neutral-900 py-12 flex flex-col justify-center items-center text-white">
-    <div class="w-full max-w-md flex flex-col items-center">
-      <ul class="flex flex-row space-x-8">
-        <li class="transform hover:-translate-y-1 transition duration-200">
-          <a href="https://twitter.com" target="_blank" class="text-gray-400 hover:text-teal-400">
-            <img class="w-8 h-8 opacity-70 hover:opacity-100 transition" src="/imgs/twitter.svg" alt="Twitter" />
+    <!-- 3. Featured Works (Hardware & Architecture Bento) -->
+    <section id="projects" class="w-full max-w-5xl mx-auto px-6 py-20">
+      
+      <!-- Section Header -->
+      <div class="reveal-header mb-12">
+        <p class="text-xs uppercase tracking-wider text-[#86868b] font-medium mb-2">Selected Systems</p>
+        <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight text-[#f5f5f7]">
+          Engineered for continuous scale.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+        <!-- Card 1: 12-col Hero Architecture Showcase -->
+        <div class="reveal-card md:col-span-12 apple-card rounded-3xl p-8 sm:p-12 relative overflow-hidden group">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            
+            <div class="lg:col-span-6 flex flex-col justify-between">
+              <div>
+                <span class="text-xs font-mono text-[#86868b] uppercase tracking-wider block mb-3">Distributed State Machine</span>
+                <h3 class="text-2xl sm:text-3xl font-semibold tracking-tight text-[#f5f5f7] mb-3">
+                  Veloce Core Engine
+                </h3>
+                <p class="text-sm sm:text-base text-[#86868b] leading-relaxed mb-6 font-normal">
+                  A high-throughput distributed key-value storage engine implemented in C++20. Engineered around non-blocking event loops, memory-mapped write-ahead logging, and an optimized implementation of the Raft consensus protocol.
+                </p>
+
+                <!-- Clean Spec Details -->
+                <div class="grid grid-cols-3 gap-4 py-4 my-2 border-y border-white/[0.08] font-mono text-xs">
+                  <div>
+                    <div class="text-[#86868b] text-[11px] mb-0.5">I/O Multiplex</div>
+                    <div class="text-[#f5f5f7] font-medium">Linux epoll</div>
+                  </div>
+                  <div>
+                    <div class="text-[#86868b] text-[11px] mb-0.5">Memory Model</div>
+                    <div class="text-[#f5f5f7] font-medium">Ring Buffers</div>
+                  </div>
+                  <div>
+                    <div class="text-[#86868b] text-[11px] mb-0.5">Consensus</div>
+                    <div class="text-[#f5f5f7] font-medium">Raft Protocol</div>
+                  </div>
+                </div>
+
+                <!-- Clean Tags -->
+                <div class="flex flex-wrap gap-2 mt-6">
+                  <span class="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/[0.06] text-xs text-[#86868b]">C++20</span>
+                  <span class="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/[0.06] text-xs text-[#86868b]">Distributed Systems</span>
+                  <span class="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/[0.06] text-xs text-[#86868b]">Zero-Copy I/O</span>
+                  <span class="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/[0.06] text-xs text-[#86868b]">Docker</span>
+                </div>
+              </div>
+
+              <!-- Action Link -->
+              <div class="mt-8">
+                <a href="https://github.com/kitalikedev" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-medium text-[#2997ff] hover:brightness-125 transition-all">
+                  <span>View architectural repository</span>
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7 17l9.2-9.2M17 17V7H7"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Architectural Visualization Card -->
+            <div class="lg:col-span-6 bg-[#0a0a0c] rounded-2xl border border-white/[0.08] p-6 font-mono text-xs text-[#86868b]">
+              <div class="flex items-center justify-between pb-3 border-b border-white/[0.08] mb-5">
+                <span class="text-[#f5f5f7] font-medium">Consensus Pipeline</span>
+                <span class="text-[11px]">Node Cluster (3-Replica)</span>
+              </div>
+
+              <!-- Minimalist Architecture Diagram -->
+              <div class="space-y-3">
+                <div class="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <span class="w-2 h-2 rounded-full bg-[#f5f5f7]"></span>
+                    <span class="text-[#f5f5f7]">Client Ingest Socket</span>
+                  </div>
+                  <span class="text-[11px]">epoll event loop</span>
+                </div>
+
+                <div class="flex justify-center text-[#86868b]/60 text-xs">↓ non-blocking queue</div>
+
+                <div class="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <span class="w-2 h-2 rounded-full bg-[#2997ff]"></span>
+                    <span class="text-[#f5f5f7]">Raft State Machine</span>
+                  </div>
+                  <span class="text-[11px]">Replicated Log</span>
+                </div>
+
+                <div class="flex justify-center text-[#86868b]/60 text-xs">↓ memory-mapped fsync</div>
+
+                <div class="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <span class="w-2 h-2 rounded-full bg-white/40"></span>
+                    <span class="text-[#f5f5f7]">Persistent WAL Storage</span>
+                  </div>
+                  <span class="text-[11px]">O_DIRECT / RingBuffer</span>
+                </div>
+              </div>
+
+              <div class="pt-4 mt-4 border-t border-white/[0.08] flex justify-between text-[11px] text-[#86868b]">
+                <span>Deterministic failover</span>
+                <span>Zero allocations on commit</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Card 2: 6-col Performance & Telemetry -->
+        <div class="reveal-card md:col-span-6 apple-card rounded-3xl p-8 flex flex-col justify-between group">
+          <div>
+            <span class="text-xs font-mono text-[#86868b] uppercase tracking-wider block mb-3">Observability Pipeline</span>
+            <h3 class="text-xl sm:text-2xl font-semibold tracking-tight text-[#f5f5f7] mb-2">
+              Spectra Real-Time Telemetry
+            </h3>
+            <p class="text-sm text-[#86868b] leading-relaxed mb-6 font-normal">
+              High-frequency telemetry ingestion service and analysis layer. Processes streaming event logs and anomalies via WebSockets without scheduling overhead.
+            </p>
+
+            <div class="space-y-2.5 mb-6 font-mono text-xs">
+              <div class="p-2.5 rounded-xl bg-[#0a0a0c] border border-white/[0.06] flex justify-between">
+                <span class="text-[#86868b]">Streaming Protocol</span>
+                <span class="text-[#f5f5f7]">Binary WebSocket Frames</span>
+              </div>
+              <div class="p-2.5 rounded-xl bg-[#0a0a0c] border border-white/[0.06] flex justify-between">
+                <span class="text-[#86868b]">Buffer Strategy</span>
+                <span class="text-[#f5f5f7]">Ring Buffer Cache</span>
+              </div>
+              <div class="p-2.5 rounded-xl bg-[#0a0a0c] border border-white/[0.06] flex justify-between">
+                <span class="text-[#86868b]">Ingestion Layer</span>
+                <span class="text-[#f5f5f7]">Go &amp; Redis Streams</span>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06] text-xs text-[#86868b]">Go</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06] text-xs text-[#86868b]">TypeScript</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06] text-xs text-[#86868b]">Redis</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06] text-xs text-[#86868b]">React</span>
+            </div>
+          </div>
+
+          <div class="pt-6 mt-6 border-t border-white/[0.08]">
+            <a href="https://github.com/kitalikedev" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-medium text-[#2997ff] hover:brightness-125 transition-all">
+              <span>View source &amp; benchmarks</span>
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7 17l9.2-9.2M17 17V7H7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 3: 6-col Interface Engine -->
+        <div class="reveal-card md:col-span-6 apple-card rounded-3xl p-8 flex flex-col justify-between group">
+          <div>
+            <span class="text-xs font-mono text-[#86868b] uppercase tracking-wider block mb-3">Graphics &amp; Runtime</span>
+            <h3 class="text-xl sm:text-2xl font-semibold tracking-tight text-[#f5f5f7] mb-2">
+              Aether Canvas Compositor
+            </h3>
+            <p class="text-sm text-[#86868b] leading-relaxed mb-6 font-normal">
+              A bespoke 2D graphics engine and layout runtime built for high-refresh client applications. Implements retained-mode rendering with dirty-region repainting.
+            </p>
+
+            <div class="space-y-2.5 mb-6 font-mono text-xs">
+              <div class="p-2.5 rounded-xl bg-[#0a0a0c] border border-white/[0.06] flex justify-between">
+                <span class="text-[#86868b]">Render Pipeline</span>
+                <span class="text-[#f5f5f7]">Canvas 2D / WebGL</span>
+              </div>
+              <div class="p-2.5 rounded-xl bg-[#0a0a0c] border border-white/[0.06] flex justify-between">
+                <span class="text-[#86868b]">Frame Scheduler</span>
+                <span class="text-[#f5f5f7]">requestAnimationFrame</span>
+              </div>
+              <div class="p-2.5 rounded-xl bg-[#0a0a0c] border border-white/[0.06] flex justify-between">
+                <span class="text-[#86868b]">State Tree</span>
+                <span class="text-[#f5f5f7]">Immutable AST</span>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06] text-xs text-[#86868b]">TypeScript</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06] text-xs text-[#86868b]">Vite</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06] text-xs text-[#86868b]">WebGL</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06] text-xs text-[#86868b]">Web Audio</span>
+            </div>
+          </div>
+
+          <div class="pt-6 mt-6 border-t border-white/[0.08]">
+            <a href="https://github.com/kitalikedev" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-medium text-[#2997ff] hover:brightness-125 transition-all">
+              <span>Explore architecture</span>
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7 17l9.2-9.2M17 17V7H7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Engineering Philosophy & Experience -->
+    <section id="engineering" class="w-full max-w-5xl mx-auto px-6 py-20">
+      
+      <div class="reveal-header mb-12">
+        <p class="text-xs uppercase tracking-wider text-[#86868b] font-medium mb-2">Engineering Philosophy</p>
+        <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight text-[#f5f5f7]">
+          Principles of durable software.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <div class="reveal-card apple-card rounded-3xl p-8 flex flex-col justify-between">
+          <div>
+            <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-xs font-mono text-[#f5f5f7] mb-5">
+              01
+            </div>
+            <h3 class="text-lg font-semibold text-[#f5f5f7] mb-2">Mechanical Sympathy</h3>
+            <p class="text-sm text-[#86868b] leading-relaxed">
+              Writing code with hardware realities in mind: cache line alignments, predictable branching, and sensible memory layout to reduce CPU stalls.
+            </p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-white/[0.08] text-xs font-mono text-[#86868b]">
+            Systems First
+          </div>
+        </div>
+
+        <div class="reveal-card apple-card rounded-3xl p-8 flex flex-col justify-between">
+          <div>
+            <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-xs font-mono text-[#f5f5f7] mb-5">
+              02
+            </div>
+            <h3 class="text-lg font-semibold text-[#f5f5f7] mb-2">Defensive Concurrency</h3>
+            <p class="text-sm text-[#86868b] leading-relaxed">
+              Favoring immutable messages, explicit state transitions, and lock-free channels over convoluted shared-memory locking patterns.
+            </p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-white/[0.08] text-xs font-mono text-[#86868b]">
+            Deterministic State
+          </div>
+        </div>
+
+        <div class="reveal-card apple-card rounded-3xl p-8 flex flex-col justify-between">
+          <div>
+            <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-xs font-mono text-[#f5f5f7] mb-5">
+              03
+            </div>
+            <h3 class="text-lg font-semibold text-[#f5f5f7] mb-2">Aesthetic Restraint</h3>
+            <p class="text-sm text-[#86868b] leading-relaxed">
+              Rejecting decorative noise and synthetic gimmickry. Prioritizing functional clarity, instantaneous user feedback, and semantic clarity.
+            </p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-white/[0.08] text-xs font-mono text-[#86868b]">
+            Human-Centric
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 4. Engineering Stack (Quiet, Organized High-Density Grid) -->
+    <section id="stack" class="w-full max-w-5xl mx-auto px-6 py-20">
+      
+      <!-- Section Header -->
+      <div class="reveal-header mb-12">
+        <p class="text-xs uppercase tracking-wider text-[#86868b] font-medium mb-2">Technical Capabilities</p>
+        <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight text-[#f5f5f7]">
+          Focused stack. Proven tools.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Column 1: Systems & Core -->
+        <div class="reveal-card apple-card rounded-3xl p-7 flex flex-col justify-between">
+          <div>
+            <h3 class="text-sm font-semibold tracking-wide uppercase text-[#f5f5f7] mb-4 pb-3 border-b border-white/[0.08]">
+              Systems
+            </h3>
+            <div class="space-y-3 font-mono text-xs">
+              <div class="flex items-center justify-between py-1">
+                <span class="text-[#f5f5f7]">C++20</span>
+                <span class="text-[#86868b]">STL · RAII · Concurrency</span>
+              </div>
+              <div class="flex items-center justify-between py-1">
+                <span class="text-[#f5f5f7]">Go</span>
+                <span class="text-[#86868b]">Goroutines · Channels</span>
+              </div>
+              <div class="flex items-center justify-between py-1">
+                <span class="text-[#f5f5f7]">Linux</span>
+                <span class="text-[#86868b]">epoll · POSIX · Systemd</span>
+              </div>
+              <div class="flex items-center justify-between py-1">
+                <span class="text-[#f5f5f7]">Profiling</span>
+                <span class="text-[#86868b]">perf · Valgrind · Memory</span>
+              </div>
+              <div class="flex items-center justify-between py-1">
+                <span class="text-[#f5f5f7]">Rust</span>
+                <span class="text-[#86868b]">Borrow Checker · Safety</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 2: Backend & Distributed Data -->
+        <div class="reveal-card apple-card rounded-3xl p-7 flex flex-col justify-between">
+          <div>
+            <h3 class="text-sm font-semibold tracking-wide uppercase text-[#f5f5f7] mb-4 pb-3 border-b border-white/[0.08]">
+              Backend
+            </h3>
+            <div class="space-y-3 font-mono text-xs">
+              <div class="flex items-center justify-between py-1">
+                <span class="text-[#f5f5f7]">Node.js</span>
+                <span class="text-[#86868b]">Event Loop · Streams</span>
+              </div>
+              <div class="flex items-center justify-between py-1">
+                <span class="text-[#f5f5f7]">PostgreSQL</span>
+                <span class="text-[#86868b]">Schema Design · Indexing</span>
+              </div>
+              <div class="flex items-center justify-between py-1">
+                <span class="text-[#f5f5f7]">Redis</span>
+                <span class="text-[#86868b]">Pub/Sub · Caching</span>
+              </div>
+              <div class="flex items-center justify-between py-1">
+                <span class="text-[#f5f5f7]">Docker</span>
+                <span class="text-[#86868b]">Containers · Multi-stage</span>
+              </div>
+              <div class="flex items-center justify-between py-1">
+                <span class="text-[#f5f5f7]">Python</span>
+                <span class="text-[#86868b]">FastAPI · Automation</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 3: Client-Side & Interfaces -->
+        <div class="reveal-card apple-card rounded-3xl p-7 flex flex-col justify-between">
+          <div>
+            <h3 class="text-sm font-semibold tracking-wide uppercase text-[#f5f5f7] mb-4 pb-3 border-b border-white/[0.08]">
+              Client-side
+            </h3>
+            <div class="space-y-3 font-mono text-xs">
+              <div class="flex items-center justify-between py-1">
+                <span class="text-[#f5f5f7]">TypeScript</span>
+                <span class="text-[#86868b]">Strict Types · AST</span>
+              </div>
+              <div class="flex items-center justify-between py-1">
+                <span class="text-[#f5f5f7]">React</span>
+                <span class="text-[#86868b]">Component Trees · State</span>
+              </div>
+              <div class="flex items-center justify-between py-1">
+                <span class="text-[#f5f5f7]">Tailwind CSS</span>
+                <span class="text-[#86868b]">Design Tokens · Layouts</span>
+              </div>
+              <div class="flex items-center justify-between py-1">
+                <span class="text-[#f5f5f7]">Vite</span>
+                <span class="text-[#86868b]">Rollup Pipeline · HMR</span>
+              </div>
+              <div class="flex items-center justify-between py-1">
+                <span class="text-[#f5f5f7]">Canvas 2D</span>
+                <span class="text-[#86868b]">High-FPS Animation</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 5. Contact Call-out Card -->
+    <section id="contact" class="w-full max-w-5xl mx-auto px-6 py-24">
+      <div class="reveal-contact apple-card rounded-3xl p-8 sm:p-14 text-center">
+        
+        <p class="text-xs uppercase tracking-wider text-[#86868b] font-medium mb-3">Connect</p>
+        <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight text-[#f5f5f7] mb-4">
+          Let’s talk architecture.
+        </h2>
+        <p class="text-sm sm:text-base text-[#86868b] max-w-lg mx-auto mb-8 font-normal leading-relaxed">
+          Open to discuss distributed systems challenges, core platform engineering, or senior engineering roles.
+        </p>
+
+        <!-- Direct Email Pill & Action -->
+        <div class="flex flex-wrap items-center justify-center gap-3 mb-10">
+          <button type="button" class="copy-email-btn apple-pill-secondary px-5 py-2.5 text-xs font-mono inline-flex items-center gap-2 cursor-pointer" data-email="contact@kitalikedev.io" aria-label="Copy email address">
+            <span>contact@kitalikedev.io</span>
+            <span class="copy-label text-[#86868b] font-sans">Copy</span>
+          </button>
+          
+          <a href="mailto:contact@kitalikedev.io" class="apple-pill-primary px-5 py-2.5 text-xs">
+            Send an email
           </a>
-        </li>
-        <li class="transform hover:-translate-y-1 transition duration-200">
-          <a href="https://linkedin.com" target="_blank" class="text-gray-400 hover:text-teal-400">
-            <img class="w-8 h-8 opacity-70 hover:opacity-100 transition" src="/imgs/linkedin.svg" alt="LinkedIn" />
+        </div>
+
+        <!-- Clean Social Links -->
+        <div class="flex items-center justify-center gap-6 pt-6 border-t border-white/[0.08] text-xs font-normal text-[#86868b]">
+          <a href="https://github.com/kitalikedev" target="_blank" rel="noopener noreferrer" class="hover:text-[#f5f5f7] transition-colors">
+            GitHub
           </a>
-        </li>
-        <li class="transform hover:-translate-y-1 transition duration-200">
-          <a href="https://github.com/kitalikedev" target="_blank" class="text-gray-400 hover:text-teal-400">
-            <img class="w-8 h-8 opacity-70 hover:opacity-100 transition" src="/imgs/github.svg" alt="GitHub" />
+          <span>·</span>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-[#f5f5f7] transition-colors">
+            LinkedIn
           </a>
-        </li>
-      </ul>
-      <div class="w-48 h-px bg-gray-700 my-6"></div>
-      <p class="text-sm text-gray-500">© 2026 Kita. All rights reserved.</p>
+          <span>·</span>
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="hover:text-[#f5f5f7] transition-colors">
+            X
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Apple-Style Minimal Footer -->
+  <footer class="w-full border-t border-white/[0.08] py-10 px-6 text-xs text-[#86868b]">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        © 2026 Kita. All rights reserved.
+      </div>
+      <div class="flex items-center gap-4 text-[#86868b]/80">
+        <span>Static Architecture</span>
+        <span>·</span>
+        <span>Tailwind CSS</span>
+        <span>·</span>
+        <span>Vite</span>
+        <span>·</span>
+        <span>GitHub Pages</span>
+      </div>
     </div>
   </footer>
+
+  <!-- Minimal Apple Toast Notification -->
+  <div id="apple-toast" class="hidden fixed bottom-6 right-6 z-50 apple-glass-dock rounded-full px-4 py-2 text-xs text-[#f5f5f7] items-center gap-2 shadow-2xl">
+    <span class="w-1.5 h-1.5 rounded-full bg-[#f5f5f7]"></span>
+    <span id="apple-toast-text">Copied to clipboard</span>
+  </div>
+
+  <!-- Back to top subtle button -->
+  <button id="back-to-top" type="button" class="fixed bottom-6 left-6 z-40 w-8 h-8 rounded-full apple-glass-dock text-[#86868b] hover:text-[#f5f5f7] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300" aria-label="Back to top">
+    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
+    </svg>
+  </button>
 
   <script type="module" src="/src/scripts/application.js"></script>
 </body>
